@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+<input type="file" name="file" id="file">
+<script>
+document.getElementById('file').onchange = function(){
+
+  var file = this.files[0];
+
+  var reader = new FileReader();
+  reader.onload = function(progressEvent){
+    var lines = this.result.split('\n');
+    var index = 0;
+      var result = "";
+      var interval = setInterval(function(){
+     result = lines[index++];
+    var re = new RegExp(/(ZZ\.ZZ\.ZZ).+/g);
+    if (re.test(result)) {
+    console.log(result);
+    result = lines[index++];
+    newResult = reverse(result);
+    sleep(1000);
+    console.log(newResult);
+} else {
+    console.log(result);
+}  
+     if(index == lines.length){
+        clearInterval(interval);
+     }
+}, 1000)
+  };
+  reader.readAsText(file);
+    function reverse(result){
+    return result.split("").reverse().join("");
+}
+    function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+};  
+
+</script>
+
+
+</body>
+</html>
